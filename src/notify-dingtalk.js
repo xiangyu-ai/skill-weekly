@@ -130,21 +130,35 @@ async function send() {
   const week  = `${d.getFullYear()}年${d.getMonth() + 1}月第${Math.ceil(d.getDate() / 7)}周`;
   const title = `📊 技术热榜周报 · ${week}`;
 
-  // 1️⃣ 尝试上传 HTML 并发链接卡片
-  if (existsSync(htmlPath)) {
+  const totalItems = snapshot.sources.reduce((n, s) => n + (s.items?.length ?? 0), 0);
+
+  // 1️⃣ 优先用 Gitee Pages 永久链接（在 .env 设置 GITEE_PAGES_URL=https://用户名.gitee.io/仓库名）
+  const giteeBase = process.env.GITEE_PAGES_URL?.replace(/\/$/, '');
+  if (giteeBase) {
+    const fileUrl = `${giteeBase}/reports/${weekKey}.html`;
+    const desc = `本期精选 ${totalItems} 个热门技能，点击查看完整 HTML 周报`;
+    const json = await postToDingTalk({
+      msgtype: 'link',
+      link: { title, text: desc, picUrl: '', messageUrl: fileUrl },
+    });
+    if (json.errcode === 0) {
+      console.log(`✓ Gitee Pages 链接已推送到钉钉：${fileUrl}`);
+      return;
+    }
+    console.warn('链接卡片发送失败，降级为 Markdown 摘要：', json);
+  }
+
+  // 2️⃣ 无 Gitee Pages 时上传 HTML 到 transfer.sh（临时链接，7 天有效）
+  if (!giteeBase && existsSync(htmlPath)) {
     console.log('上传 HTML 到 transfer.sh ...');
     try {
       const fileUrl = await uploadHtml(htmlPath);
       console.log(`上传成功：${fileUrl}`);
-
-      const totalItems = snapshot.sources.reduce((n, s) => n + (s.items?.length ?? 0), 0);
       const desc = `本期精选 ${totalItems} 个热门技能，点击查看完整 HTML 周报（7 天有效）`;
-
       const json = await postToDingTalk({
         msgtype: 'link',
         link: { title, text: desc, picUrl: '', messageUrl: fileUrl },
       });
-
       if (json.errcode === 0) {
         console.log('✓ HTML 链接已推送到钉钉');
         return;
@@ -155,7 +169,7 @@ async function send() {
     }
   }
 
-  // 2️⃣ 降级：发 Markdown 摘要
+  // 3️⃣ 降级：发 Markdown 摘要
   const text = buildSummary(snapshot, lastSnapshot);
   const json = await postToDingTalk({ msgtype: 'markdown', markdown: { title, text } });
 
