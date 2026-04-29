@@ -1,0 +1,30 @@
+{
+  "sources": [
+    {
+      "type": "skills-sh",
+      "enabled": true,
+      "label": "skills.sh 排行榜",
+      "topN": 20
+    },
+    {
+      "type": "github-trending",
+      "enabled": false,
+      "label": "GitHub Trending（本周）",
+      "language": "",
+      "since": "weekly",
+      "topN": 20
+    },
+    {
+      "type": "hackernews",
+      "enabled": false,
+      "label": "Hacker News 热帖",
+      "query": "AI agent tools automation",
+      "topN": 15
+    }
+  ],
+  "report": {
+    "outputDir": "./reports",
+    "maxTotal": 20,
+    "title": "技术热榜周报"
+  }
+}

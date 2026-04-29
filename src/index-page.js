@@ -1,0 +1,101 @@
+import { readdirSync, writeFileSync } from 'fs';
+import { resolve, dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const reportsDir = resolve(__dirname, '../reports');
+const rootDir = resolve(__dirname, '..');
+
+function parseWeekFile(filename) {
+  const m = filename.match(/^(\d{4})-W(\d+)\.html$/);
+  if (!m) return null;
+  return { year: m[1], week: parseInt(m[2], 10), file: filename };
+}
+
+function weekLabel(entry) {
+  return `${entry.year} 年 第 ${entry.week} 周`;
+}
+
+export function generateIndexPage() {
+  let entries = [];
+  try {
+    entries = readdirSync(reportsDir)
+      .map(parseWeekFile)
+      .filter(Boolean)
+      .sort((a, b) => b.year - a.year || b.week - a.week);
+  } catch {
+    entries = [];
+  }
+
+  const latestHref = entries.length ? `reports/${entries[0].file}` : null;
+
+  const rows = entries.map((e, i) => {
+    const badge = i === 0 ? '<span class="badge-latest">最新</span>' : '';
+    return `        <li>
+          <a href="reports/${e.file}" class="report-link">
+            <span class="report-label">${weekLabel(e)}</span>
+            ${badge}
+            <span class="arrow">→</span>
+          </a>
+        </li>`;
+  }).join('\n');
+
+  const latestBtn = latestHref
+    ? `<a class="btn-latest" href="${latestHref}">查看本周报告 →</a>`
+    : `<p class="no-reports">暂无报告，运行 node src/index.js 生成</p>`;
+
+  const html = `<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>技术热榜周报</title>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:#f0f2f5;color:#1f2937;line-height:1.75;font-size:15px;min-height:100vh;display:flex;align-items:center;justify-content:center}
+    .wrap{width:100%;max-width:560px;padding:24px 16px 64px}
+    .header{background:#fff;border-radius:16px;padding:36px 32px 28px;margin-bottom:16px;border:1px solid #e5e7eb;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+    .eyebrow{font-size:11px;font-weight:700;letter-spacing:2.5px;color:#9ca3af;text-transform:uppercase;margin-bottom:10px}
+    .site-title{font-size:26px;font-weight:800;color:#111827;letter-spacing:-0.5px;margin-bottom:8px}
+    .site-desc{font-size:14px;color:#6b7280;margin-bottom:24px;line-height:1.7}
+    .btn-latest{display:inline-block;background:#1d4ed8;color:#fff;border-radius:8px;padding:10px 24px;font-size:14px;font-weight:600;text-decoration:none;transition:background .15s}
+    .btn-latest:hover{background:#1e40af}
+    .no-reports{font-size:13px;color:#9ca3af}
+    .card{background:#fff;border-radius:14px;padding:20px 24px;border:1px solid #e5e7eb;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+    .card-title{font-size:13px;font-weight:700;color:#374151;margin-bottom:14px;letter-spacing:0.5px}
+    ul{list-style:none}
+    li+li{border-top:1px solid #f3f4f6}
+    .report-link{display:flex;align-items:center;gap:8px;padding:12px 4px;text-decoration:none;color:#1f2937;transition:color .12s}
+    .report-link:hover{color:#1d4ed8}
+    .report-label{flex:1;font-size:14px;font-weight:500}
+    .badge-latest{font-size:11px;font-weight:700;background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe;border-radius:4px;padding:1px 8px}
+    .arrow{color:#d1d5db;font-size:14px;transition:transform .12s}
+    .report-link:hover .arrow{transform:translateX(3px);color:#1d4ed8}
+    .footer{text-align:center;padding:24px 0 0;color:#9ca3af;font-size:12px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="header">
+      <div class="eyebrow">Skills Weekly</div>
+      <div class="site-title">技术热榜周报</div>
+      <p class="site-desc">每周自动追踪 AI、工具、开发者社区热门技能<br>覆盖 skills.sh · GitHub Trending · Hacker News</p>
+      ${latestBtn}
+    </div>
+
+    <div class="card">
+      <div class="card-title">📅 历史报告</div>
+      <ul>
+${rows || '        <li style="padding:12px 4px;font-size:13px;color:#9ca3af">暂无报告</li>'}
+      </ul>
+    </div>
+
+    <div class="footer">由 skill-weekly-tracker 自动生成</div>
+  </div>
+</body>
+</html>`;
+
+  const outPath = resolve(rootDir, 'index.html');
+  writeFileSync(outPath, html, 'utf8');
+  return outPath;
+}

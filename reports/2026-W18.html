@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>技术热榜周报 · 2026年4月第5周</title>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:#f0f2f5;color:#1f2937;line-height:1.75;font-size:15px}
+    a{color:inherit;text-decoration:none}
+
+    .container{max-width:880px;margin:0 auto;padding:28px 16px 64px}
+
+    /* Header */
+    .header{background:#fff;border-radius:16px;padding:40px 36px 32px;margin-bottom:20px;border:1px solid #e5e7eb;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+    .header-eyebrow{font-size:12px;font-weight:600;letter-spacing:2px;color:#9ca3af;text-transform:uppercase;margin-bottom:10px}
+    .header-title{font-size:30px;font-weight:800;color:#111827;letter-spacing:-0.5px;margin-bottom:10px}
+    .header-summary{font-size:15px;color:#374151;max-width:560px;margin:0 auto 20px;line-height:1.7}
+    .header-meta{font-size:13px;color:#9ca3af;margin-bottom:20px}
+    .header-stats{display:inline-flex;gap:10px;flex-wrap:wrap;justify-content:center}
+    .stat{background:#f3f4f6;border-radius:8px;padding:5px 14px;font-size:13px;color:#4b5563}
+    .stat strong{color:#111827;font-weight:700}
+
+    /* Sections */
+    .section{background:#fff;border-radius:14px;padding:24px;margin-bottom:16px;border:1px solid #e5e7eb;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+    .section-title{display:flex;align-items:center;gap:8px;font-size:16px;font-weight:700;color:#111827;padding-bottom:14px;margin-bottom:16px;border-bottom:2px solid var(--border)}
+    .section-count{margin-left:auto;font-size:12px;font-weight:500;color:#9ca3af;background:#f3f4f6;border-radius:20px;padding:2px 10px}
+
+    /* Cards */
+    .card{padding:20px 0;border-bottom:1px solid #f3f4f6}
+    .card:last-child{border-bottom:none;padding-bottom:4px}
+    .card-head{display:flex;align-items:flex-start;gap:10px;margin-bottom:8px}
+    .card-rank{font-size:13px;font-weight:700;color:#d1d5db;flex-shrink:0;width:28px;text-align:right;padding-top:3px}
+    .card-title-wrap{flex:1;min-width:0}
+    .card-title{font-size:15px;font-weight:700;color:#1d4ed8;word-break:break-word;font-family:'SF Mono','Fira Code',monospace}
+    .card-title a{color:#1d4ed8}
+    .card-title a:hover{color:#1e40af;text-decoration:underline}
+    .card-subtitle{font-size:12px;color:#9ca3af;margin-top:2px}
+
+    /* Meta */
+    .card-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:14px;padding-left:38px}
+    .score{font-size:12px;font-family:'SF Mono','Fira Code',monospace;background:#f3f4f6;border-radius:4px;padding:2px 8px;color:#374151}
+    .stars-count{font-size:12px;color:#b45309;font-weight:600}
+    .stars-delta{font-size:11px;color:#10b981;font-weight:500;margin-left:2px}
+    .badge{font-size:11px;border-radius:4px;padding:2px 8px;font-weight:600}
+    .badge-new {background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe}
+    .badge-hot {background:#fff7ed;color:#c2410c;border:1px solid #fed7aa}
+    .badge-up  {background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0}
+    .badge-down{background:#fef2f2;color:#b91c1c;border:1px solid #fecaca}
+    .badge-flat{background:#f9fafb;color:#6b7280;border:1px solid #e5e7eb}
+    .tags{display:inline-flex;gap:4px;flex-wrap:wrap}
+    .tag{font-size:11px;background:var(--light);color:var(--accent);border:1px solid var(--border);border-radius:4px;padding:1px 7px}
+
+    /* Description */
+    .card-desc{padding-left:38px;font-size:13px;color:#4b5563;line-height:1.8;margin-bottom:8px}
+    .card-desc code{background:#f3f4f6;border-radius:3px;padding:1px 5px;font-family:'SF Mono','Fira Code',monospace;font-size:12px;color:#1f2937}
+
+    /* URL */
+    .card-url{display:inline-block;padding-left:38px;font-size:12px;color:#9ca3af;word-break:break-all;margin-top:2px}
+    .card-url:hover{color:#1d4ed8;text-decoration:underline}
+
+    /* Footer */
+    .footer{text-align:center;padding:32px 0 8px;color:#9ca3af;font-size:12px;border-top:1px solid #e5e7eb;margin-top:8px}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="header-eyebrow">Skills Weekly</div>
+      <div class="header-title">技术热榜周报</div>
+      <p class="header-summary">本期精选 20 个 skills.sh 高热技能，覆盖AI &amp; Agent 自动化等方向，助你的 AI 编程工具快速获得垂直领域专业能力。</p>
+      <div class="header-meta">2026年4月第5周 · 生成于 2026年4月29日</div>
+      <div class="header-stats">
+        <span class="stat"><strong>1</strong> 个数据源</span>
+        <span class="stat"><strong>20</strong> 个精选技能</span>
+        <span class="stat"><strong>1</strong> 个分类</span>
+      </div>
+    </header>
+
+    
+  <section class="section" style="--accent:#7c3aed;--light:#f5f3ff;--border:#c4b5fd">
+    <h2 class="section-title">
+      <span>🤖</span>AI &amp; Agent 自动化
+      <span class="section-count">20 个技能</span>
+    </h2>
+    
+  <div class="card">
+    <div class="card-head">
+      <span class="card-rank">#1</span>
+      <div class="card-title-wrap">
+        <div class="card-title"><a href="https://skills.sh/vercel-labs/agent-skills/vercel-react-best-practices" target="_blank" rel="noopener">vercel-react-best-practices</a></div>
+        <div class="card-subtitle">Vercel React 最佳 实践</div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span class="score">358.2K 次安装</span>
+      <span class="stars-count">★ 25.9k Stars</span>
+      <span class="badge badge-new">首次上榜</span>
+      <span class="tags"><span class="tag">React</span></span>
+    </div>
+    <p class="card-desc">Vercel React 最佳 实践（vercel-react-best-practices）由 Vercel 工程团队 发布于 skills.sh，是专注于前端与界面设计的 AI Agent 技能包。该技能将 Vercel 内部积累的 React/Next.js 工程规范系统化，覆盖 Server Components 使用方式、数据获取策略与性能优化要点，AI 助手加载后可在代码生成时自动遵循这些生产级标准，无需开发者反复提示。主要面向前端工程师、UI/UX 设计师及使用 AI 工具进行 React/Next.js 开发的团队，其创新在于将 Vercel 的私域工程经验直接&quot;技能化&quot;，让 AI 无需人工提示即可实时调用权威规范，规避常见的反模式。目前安装量已达 358.2K，可通过 <code>npx skills add vercel-labs/agent-skills@vercel-react-best-practices</code> 集成到 Claude Code、Cursor 等主流 AI 工具。</p>
+    <a class="card-url" href="https://skills.sh/vercel-labs/agent-skills/vercel-react-best-practices" target="_blank" rel="noopener">🔗 https://skills.sh/vercel-labs/agent-skills/vercel-react-best-practices</a>
+  </div>
+  <div class="card">
+    <div class="card-head">
+      <span class="card-rank">#2</span>
+      <div class="card-title-wrap">
+        <div class="card-title"><a href="https://skills.sh/anthropics/skills/frontend-design" target="_blank" rel="noopener">frontend-design</a></div>
+        <div class="card-subtitle">Anthropic 前端 设计</div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span class="score">349.7K 次安装</span>
+      <span class="stars-count">★ 125.8k Stars</span>
+      <span class="badge badge-new">首次上榜</span>
+      <span class="tags"><span class="tag">设计</span></span>
+    </div>
+    <p class="card-desc">Anthropic 前端 设计（frontend-design）由 Anthropic 官方 发布于 skills.sh，是专注于前端与界面设计的 AI Agent 技能包。该技能为 AI 注入系统化的前端设计语言，涵盖布局网格、排版层次、色彩系统与交互反馈规范，使 AI 生成的 UI 代码兼顾视觉美感与可访问性，符合现代设计系统标准。主要面向前端工程师、UI/UX 设计师及使用 AI 工具进行 React/Next.js 开发的团队，其创新在于将设计系统中隐性的审美规则转化为 AI 可执行的显性指令，填补了通用 AI 在视觉设计判断上的短板。目前安装量已达 349.7K，可通过 <code>npx skills add anthropics/skills@frontend-design</code> 集成到 Claude Code、Cursor 等主流 AI 工具。</p>
+    <a class="card-url" href="https://skills.sh/anthropics/skills/frontend-design" target="_blank" rel="noopener">🔗 https://skills.sh/anthropics/skills/frontend-design</a>
+  </div>
+  <div class="card">
+    <div class="card-head">
+      <span class="card-rank">#3</span>
+      <div class="card-title-wrap">
+        <div class="card-title"><a href="https://skills.sh/vercel-labs/agent-skills/web-design-guidelines" target="_blank" rel="noopener">web-design-guidelines</a></div>
+        <div class="card-subtitle">Vercel 网页 设计 设计规范</div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span class="score">285.1K 次安装</span>
+      <span class="stars-count">★ 25.9k Stars</span>
+      <span class="badge badge-new">首次上榜</span>
+      <span class="tags"><span class="tag">设计</span></span>
+    </div>
+    <p class="card-desc">Vercel 网页 设计 设计规范（web-design-guidelines）由 Vercel 工程团队 发布于 skills.sh，是专注于前端与界面设计的 AI Agent 技能包。该技能提供面向 AI 的网页设计决策框架，涵盖响应式布局、视觉层次与组件交互规范，帮助 AI 在输出设计方案时兼顾美观性、可用性与跨设备适配。主要面向前端工程师、UI/UX 设计师及使用 AI 工具进行 React/Next.js 开发的团队，其创新在于将设计系统中隐性的审美规则转化为 AI 可执行的显性指令，填补了通用 AI 在视觉设计判断上的短板。目前安装量已达 285.1K，可通过 <code>npx skills add vercel-labs/agent-skills@web-design-guidelines</code> 集成到 Claude Code、Cursor 等主流 AI 工具。</p>
+    <a class="card-url" href="https://skills.sh/vercel-labs/agent-skills/web-design-guidelines" target="_blank" rel="noopener">🔗 https://skills.sh/vercel-labs/agent-skills/web-design-guidelines</a>
+  </div>
+  <div class="card">
+    <div class="card-head">
+      <span class="card-rank">#4</span>
+      <div class="card-title-wrap">
+        <div class="card-title"><a href="https://skills.sh/vercel-labs/agent-browser/agent-browser" target="_blank" rel="noopener">agent-browser</a></div>
+        <div class="card-subtitle">Vercel Agent 浏览器</div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span class="score">221.4K 次安装</span>
+      <span class="stars-count">★ 31.0k Stars</span>
+      <span class="badge badge-new">首次上榜</span>
+      <span class="tags"><span class="tag">AI Agent</span></span>
+    </div>
+    <p class="card-desc">Vercel Agent 浏览器（agent-browser）由 Vercel 工程团队 发布于 skills.sh，是专注于AI Agent 自动化的 AI Agent 技能包。该技能赋予 AI Agent 原生浏览器操控能力，可通过自然语言指令完成页面导航、元素交互、表单填写与内容采集，适合快速构建 Web 自动化脚本与信息抓取流程。主要面向AI Agent 开发者、RPA 工程师及希望以最低门槛实现 Web 自动化的产品团队，其创新在于无需部署额外驱动服务，直接通过技能包赋予 AI 浏览器控制能力，大幅降低 Web 自动化的接入门槛。目前安装量已达 221.4K，可通过 <code>npx skills add vercel-labs/agent-browser@agent-browser</code> 集成到 Claude Code、Cursor 等主流 AI 工具。</p>
+    <a class="card-url" href="https://skills.sh/vercel-labs/agent-browser/agent-browser" target="_blank" rel="noopener">🔗 https://skills.sh/vercel-labs/agent-browser/agent-browser</a>
+  </div>
+  <div class="card">
+    <div class="card-head">
+      <span class="card-rank">#5</span>
+      <div class="card-title-wrap">
+        <div class="card-title"><a href="https://skills.sh/vercel-labs/agent-skills/vercel-composition-patterns" target="_blank" rel="noopener">vercel-composition-patterns</a></div>
+        <div class="card-subtitle">Vercel 组件组合 设计模式</div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span class="score">153.5K 次安装</span>
+      <span class="stars-count">★ 25.9k Stars</span>
+      <span class="badge badge-new">首次上榜</span>
+      
+    </div>
+    <p class="card-desc">Vercel 组件组合 设计模式（vercel-composition-patterns）由 Vercel 工程团队 发布于 skills.sh，是专注于软件工程效率的 AI Agent 技能包。该技能将经典设计模式（组合、依赖注入、工厂等）与现代前端组件化思想融合，为 AI 提供可复用的代码结构模板，生成更具可维护性与扩展性的架构代码。主要面向软件工程效率方向的开发者与工程团队，其创新在于将垂直领域的专业知识以&quot;可插拔&quot;形式注入通用 AI 工具，突破了 AI 在细分场景下的上下文局限。目前安装量已达 153.5K，可通过 <code>npx skills add vercel-labs/agent-skills@vercel-composition-patterns</code> 集成到 Claude Code、Cursor 等主流 AI 工具。</p>
+    <a class="card-url" href="https://skills.sh/vercel-labs/agent-skills/vercel-composition-patterns" target="_blank" rel="noopener">🔗 https://skills.sh/vercel-labs/agent-skills/vercel-composition-patterns</a>
+  </div>
+  <div class="card">
+    <div class="card-head">
+      <span class="card-rank">#6</span>
+      <div class="card-title-wrap">
+        <div class="card-title"><a href="https://skills.sh/supabase/agent-skills/supabase-postgres-best-practices" target="_blank" rel="noopener">supabase-postgres-best-practices</a></div>
+        <div class="card-subtitle">Supabase PostgreSQL 最佳 实践</div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span class="score">130.1K 次安装</span>
+      <span class="stars-count">★ 2.0k Stars</span>
+      <span class="badge badge-new">首次上榜</span>
+      <span class="tags"><span class="tag">数据库</span></span>
+    </div>
+    <p class="card-desc">Supabase PostgreSQL 最佳 实践（supabase-postgres-best-practices）由 Supabase 官方 发布于 skills.sh，是专注于数据库与数据管理的 AI Agent 技能包。该技能将 Supabase 数据库设计最佳实践注入 AI，包含表结构设计、索引优化、RLS 行级权限策略及实时订阅配置，AI 生成的数据模型与 SQL 可直接用于生产环境而无需二次审查。主要面向后端工程师、全栈开发者及希望通过 AI 快速构建可靠数据层的独立开发者，其创新在于将数据库安全规范（RLS、权限隔离）与性能调优标准同时注入 AI 上下文，使生成代码天然具备生产安全属性。目前安装量已达 130.1K，可通过 <code>npx skills add supabase/agent-skills@supabase-postgres-best-practices</code> 集成到 Claude Code、Cursor 等主流 AI 工具。</p>
+    <a class="card-url" href="https://skills.sh/supabase/agent-skills/supabase-postgres-best-practices" target="_blank" rel="noopener">🔗 https://skills.sh/supabase/agent-skills/supabase-postgres-best-practices</a>
+  </div>
+  <div class="card">
+    <div class="card-head">
+      <span class="card-rank">#7</span>
+      <div class="card-title-wrap">
+        <div class="card-title"><a href="https://skills.sh/vercel-labs/agent-skills/vercel-react-native-skills" target="_blank" rel="noopener">vercel-react-native-skills</a></div>
+        <div class="card-subtitle">Vercel React Native 技能</div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span class="score">103.2K 次安装</span>
+      <span class="stars-count">★ 25.9k Stars</span>
+      <span class="badge badge-new">首次上榜</span>
+      <span class="tags"><span class="tag">React</span><span class="tag">移动端</span></span>
+    </div>
+    <p class="card-desc">Vercel React Native 技能（vercel-react-native-skills）由 Vercel 工程团队 发布于 skills.sh，是专注于前端与界面设计的 AI Agent 技能包。该技能为 AI 提供 React Native 跨平台开发规范，涵盖平台适配、手势交互与导航架构，让 AI 输出的移动端代码在 iOS 与 Android 上均可高质量运行。主要面向前端工程师、UI/UX 设计师及使用 AI 工具进行 React/Next.js 开发的团队，其创新在于将垂直领域的专业知识以&quot;可插拔&quot;形式注入通用 AI 工具，突破了 AI 在细分场景下的上下文局限。目前安装量已达 103.2K，可通过 <code>npx skills add vercel-labs/agent-skills@vercel-react-native-skills</code> 集成到 Claude Code、Cursor 等主流 AI 工具。</p>
+    <a class="card-url" href="https://skills.sh/vercel-labs/agent-skills/vercel-react-native-skills" target="_blank" rel="noopener">🔗 https://skills.sh/vercel-labs/agent-skills/vercel-react-native-skills</a>
+  </div>
+  <div class="card">
+    <div class="card-head">
+      <span class="card-rank">#8</span>
+      <div class="card-title-wrap">
+        <div class="card-title"><a href="https://skills.sh/arvindrk/extract-design-system/extract-design-system" target="_blank" rel="noopener">extract-design-system</a></div>
+        <div class="card-subtitle">提取 设计 系统</div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span class="score">74.5K 次安装</span>
+      <span class="stars-count">★ 22 Stars</span>
+      <span class="badge badge-new">首次上榜</span>
+      <span class="tags"><span class="tag">设计</span></span>
+    </div>
+    <p class="card-desc">提取 设计 系统（extract-design-system）由 arvindrk 团队 发布于 skills.sh，是专注于前端与界面设计的 AI Agent 技能包。该技能为 AI Agent 提供前端与界面设计领域的专业知识与操作规范，使 AI 在处理相关任务时具备更深的领域上下文，显著提升生成代码的准确性与行业标准符合度。主要面向前端工程师、UI/UX 设计师及使用 AI 工具进行 React/Next.js 开发的团队，其创新在于将设计系统中隐性的审美规则转化为 AI 可执行的显性指令，填补了通用 AI 在视觉设计判断上的短板。目前安装量已达 74.5K，可通过 <code>npx skills add arvindrk/extract-design-system@extract-design-system</code> 集成到 Claude Code、Cursor 等主流 AI 工具。</p>
+    <a class="card-url" href="https://skills.sh/arvindrk/extract-design-system/extract-design-system" target="_blank" rel="noopener">🔗 https://skills.sh/arvindrk/extract-design-system/extract-design-system</a>
+  </div>
+  <div class="card">
+    <div class="card-head">
+      <span class="card-rank">#9</span>
+      <div class="card-title-wrap">
+        <div class="card-title"><a href="https://skills.sh/sleekdotdesign/agent-skills/sleek-design-mobile-apps" target="_blank" rel="noopener">sleek-design-mobile-apps</a></div>
+        <div class="card-subtitle">极简 设计 移动端 应用</div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span class="score">67.8K 次安装</span>
+      <span class="stars-count">★ 382 Stars</span>
+      <span class="badge badge-new">首次上榜</span>
+      <span class="tags"><span class="tag">设计</span><span class="tag">移动端</span></span>
+    </div>
+    <p class="card-desc">极简 设计 移动端 应用（sleek-design-mobile-apps）由 sleekdotdesign 团队 发布于 skills.sh，是专注于前端与界面设计的 AI Agent 技能包。该技能为 AI 提供 React Native 跨平台开发规范，涵盖平台适配、手势交互与导航架构，让 AI 输出的移动端代码在 iOS 与 Android 上均可高质量运行。主要面向前端工程师、UI/UX 设计师及使用 AI 工具进行 React/Next.js 开发的团队，其创新在于将设计系统中隐性的审美规则转化为 AI 可执行的显性指令，填补了通用 AI 在视觉设计判断上的短板。目前安装量已达 67.8K，可通过 <code>npx skills add sleekdotdesign/agent-skills@sleek-design-mobile-apps</code> 集成到 Claude Code、Cursor 等主流 AI 工具。</p>
+    <a class="card-url" href="https://skills.sh/sleekdotdesign/agent-skills/sleek-design-mobile-apps" target="_blank" rel="noopener">🔗 https://skills.sh/sleekdotdesign/agent-skills/sleek-design-mobile-apps</a>
+  </div>
+  <div class="card">
+    <div class="card-head">
+      <span class="card-rank">#10</span>
+      <div class="card-title-wrap">
+        <div class="card-title"><a href="https://skills.sh/pbakaus/impeccable/frontend-design" target="_blank" rel="noopener">frontend-design</a></div>
+        <div class="card-subtitle">前端 设计</div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span class="score">53.4K 次安装</span>
+      <span class="stars-count">★ 23.1k Stars</span>
+      <span class="badge badge-new">首次上榜</span>
+      <span class="tags"><span class="tag">设计</span></span>
+    </div>
+    <p class="card-desc">前端 设计（frontend-design）由 独立开发者 pbakaus 发布于 skills.sh，是专注于前端与界面设计的 AI Agent 技能包。该技能为 AI 注入系统化的前端设计语言，涵盖布局网格、排版层次、色彩系统与交互反馈规范，使 AI 生成的 UI 代码兼顾视觉美感与可访问性，符合现代设计系统标准。主要面向前端工程师、UI/UX 设计师及使用 AI 工具进行 React/Next.js 开发的团队，其创新在于将设计系统中隐性的审美规则转化为 AI 可执行的显性指令，填补了通用 AI 在视觉设计判断上的短板。目前安装量已达 53.4K，可通过 <code>npx skills add pbakaus/impeccable@frontend-design</code> 集成到 Claude Code、Cursor 等主流 AI 工具。</p>
+    <a class="card-url" href="https://skills.sh/pbakaus/impeccable/frontend-design" target="_blank" rel="noopener">🔗 https://skills.sh/pbakaus/impeccable/frontend-design</a>
+  </div>
+  <div class="card">
+    <div class="card-head">
+      <span class="card-rank">#11</span>
+      <div class="card-title-wrap">
+        <div class="card-title"><a href="https://skills.sh/anthropics/skills/canvas-design" target="_blank" rel="noopener">canvas-design</a></div>
+        <div class="card-subtitle">Anthropic Canvas 设计</div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span class="score">46K 次安装</span>
+      <span class="stars-count">★ 125.8k Stars</span>
+      <span class="badge badge-new">首次上榜</span>
+      <span class="tags"><span class="tag">设计</span></span>
+    </div>
+    <p class="card-desc">Anthropic Canvas 设计（canvas-design）由 Anthropic 官方 发布于 skills.sh，是专注于前端与界面设计的 AI Agent 技能包。该技能为 AI Agent 提供前端与界面设计领域的专业知识与操作规范，使 AI 在处理相关任务时具备更深的领域上下文，显著提升生成代码的准确性与行业标准符合度。主要面向前端工程师、UI/UX 设计师及使用 AI 工具进行 React/Next.js 开发的团队，其创新在于将设计系统中隐性的审美规则转化为 AI 可执行的显性指令，填补了通用 AI 在视觉设计判断上的短板。目前安装量已达 46K，可通过 <code>npx skills add anthropics/skills@canvas-design</code> 集成到 Claude Code、Cursor 等主流 AI 工具。</p>
+    <a class="card-url" href="https://skills.sh/anthropics/skills/canvas-design" target="_blank" rel="noopener">🔗 https://skills.sh/anthropics/skills/canvas-design</a>
+  </div>
+  <div class="card">
+    <div class="card-head">
+      <span class="card-rank">#12</span>
+      <div class="card-title-wrap">
+        <div class="card-title"><a href="https://skills.sh/leonxlnx/taste-skill/design-taste-frontend" target="_blank" rel="noopener">design-taste-frontend</a></div>
+        <div class="card-subtitle">设计 Taste 前端</div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span class="score">35K 次安装</span>
+      <span class="stars-count">★ 13.9k Stars</span>
+      <span class="badge badge-new">首次上榜</span>
+      <span class="tags"><span class="tag">设计</span></span>
+    </div>
+    <p class="card-desc">设计 Taste 前端（design-taste-frontend）由 leonxlnx 团队 发布于 skills.sh，是专注于前端与界面设计的 AI Agent 技能包。该技能为 AI 注入系统化的前端设计语言，涵盖布局网格、排版层次、色彩系统与交互反馈规范，使 AI 生成的 UI 代码兼顾视觉美感与可访问性，符合现代设计系统标准。主要面向前端工程师、UI/UX 设计师及使用 AI 工具进行 React/Next.js 开发的团队，其创新在于将设计系统中隐性的审美规则转化为 AI 可执行的显性指令，填补了通用 AI 在视觉设计判断上的短板。目前安装量已达 35K，可通过 <code>npx skills add leonxlnx/taste-skill@design-taste-frontend</code> 集成到 Claude Code、Cursor 等主流 AI 工具。</p>
+    <a class="card-url" href="https://skills.sh/leonxlnx/taste-skill/design-taste-frontend" target="_blank" rel="noopener">🔗 https://skills.sh/leonxlnx/taste-skill/design-taste-frontend</a>
+  </div>
+  <div class="card">
+    <div class="card-head">
+      <span class="card-rank">#13</span>
+      <div class="card-title-wrap">
+        <div class="card-title"><a href="https://skills.sh/neondatabase/agent-skills/neon-postgres" target="_blank" rel="noopener">neon-postgres</a></div>
+        <div class="card-subtitle">Neon PostgreSQL</div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span class="score">28.8K 次安装</span>
+      <span class="stars-count">★ 56 Stars</span>
+      <span class="badge badge-new">首次上榜</span>
+      <span class="tags"><span class="tag">数据库</span></span>
+    </div>
+    <p class="card-desc">Neon PostgreSQL（neon-postgres）由 neondatabase 团队 发布于 skills.sh，是专注于数据库与数据管理的 AI Agent 技能包。该技能为 AI Agent 提供数据库与数据管理领域的专业知识与操作规范，使 AI 在处理相关任务时具备更深的领域上下文，显著提升生成代码的准确性与行业标准符合度。主要面向后端工程师、全栈开发者及希望通过 AI 快速构建可靠数据层的独立开发者，其创新在于将数据库安全规范（RLS、权限隔离）与性能调优标准同时注入 AI 上下文，使生成代码天然具备生产安全属性。目前安装量已达 28.8K，可通过 <code>npx skills add neondatabase/agent-skills@neon-postgres</code> 集成到 Claude Code、Cursor 等主流 AI 工具。</p>
+    <a class="card-url" href="https://skills.sh/neondatabase/agent-skills/neon-postgres" target="_blank" rel="noopener">🔗 https://skills.sh/neondatabase/agent-skills/neon-postgres</a>
+  </div>
+  <div class="card">
+    <div class="card-head">
+      <span class="card-rank">#14</span>
+      <div class="card-title-wrap">
+        <div class="card-title"><a href="https://skills.sh/vercel-labs/agent-skills/vercel-react-view-transitions" target="_blank" rel="noopener">vercel-react-view-transitions</a></div>
+        <div class="card-subtitle">Vercel React View Transitions</div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span class="score">22.5K 次安装</span>
+      <span class="stars-count">★ 25.9k Stars</span>
+      <span class="badge badge-new">首次上榜</span>
+      <span class="tags"><span class="tag">React</span></span>
+    </div>
+    <p class="card-desc">Vercel React View Transitions（vercel-react-view-transitions）由 Vercel 工程团队 发布于 skills.sh，是专注于前端与界面设计的 AI Agent 技能包。该技能为 AI Agent 提供前端与界面设计领域的专业知识与操作规范，使 AI 在处理相关任务时具备更深的领域上下文，显著提升生成代码的准确性与行业标准符合度。主要面向前端工程师、UI/UX 设计师及使用 AI 工具进行 React/Next.js 开发的团队，其创新在于将垂直领域的专业知识以&quot;可插拔&quot;形式注入通用 AI 工具，突破了 AI 在细分场景下的上下文局限。目前安装量已达 22.5K，可通过 <code>npx skills add vercel-labs/agent-skills@vercel-react-view-transitions</code> 集成到 Claude Code、Cursor 等主流 AI 工具。</p>
+    <a class="card-url" href="https://skills.sh/vercel-labs/agent-skills/vercel-react-view-transitions" target="_blank" rel="noopener">🔗 https://skills.sh/vercel-labs/agent-skills/vercel-react-view-transitions</a>
+  </div>
+  <div class="card">
+    <div class="card-head">
+      <span class="card-rank">#15</span>
+      <div class="card-title-wrap">
+        <div class="card-title"><a href="https://skills.sh/supercent-io/skills-template/database-schema-design" target="_blank" rel="noopener">database-schema-design</a></div>
+        <div class="card-subtitle">数据库 Schema 设计</div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span class="score">12.1K 次安装</span>
+      
+      <span class="badge badge-new">首次上榜</span>
+      <span class="tags"><span class="tag">设计</span></span>
+    </div>
+    <p class="card-desc">数据库 Schema 设计（database-schema-design）由 supercent-io 团队 发布于 skills.sh，是专注于前端与界面设计的 AI Agent 技能包。该技能为 AI Agent 提供前端与界面设计领域的专业知识与操作规范，使 AI 在处理相关任务时具备更深的领域上下文，显著提升生成代码的准确性与行业标准符合度。主要面向前端工程师、UI/UX 设计师及使用 AI 工具进行 React/Next.js 开发的团队，其创新在于将设计系统中隐性的审美规则转化为 AI 可执行的显性指令，填补了通用 AI 在视觉设计判断上的短板。目前安装量已达 12.1K，可通过 <code>npx skills add supercent-io/skills-template@database-schema-design</code> 集成到 Claude Code、Cursor 等主流 AI 工具。</p>
+    <a class="card-url" href="https://skills.sh/supercent-io/skills-template/database-schema-design" target="_blank" rel="noopener">🔗 https://skills.sh/supercent-io/skills-template/database-schema-design</a>
+  </div>
+  <div class="card">
+    <div class="card-head">
+      <span class="card-rank">#16</span>
+      <div class="card-title-wrap">
+        <div class="card-title"><a href="https://skills.sh/callstackincubator/agent-skills/react-native-best-practices" target="_blank" rel="noopener">react-native-best-practices</a></div>
+        <div class="card-subtitle">React Native 最佳 实践</div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span class="score">11.3K 次安装</span>
+      <span class="stars-count">★ 1.3k Stars</span>
+      <span class="badge badge-new">首次上榜</span>
+      <span class="tags"><span class="tag">React</span><span class="tag">移动端</span></span>
+    </div>
+    <p class="card-desc">React Native 最佳 实践（react-native-best-practices）由 callstackincubator 团队 发布于 skills.sh，是专注于前端与界面设计的 AI Agent 技能包。该技能将 callstackincubator 团队 内部积累的 React/Next.js 工程规范系统化，覆盖 Server Components 使用方式、数据获取策略与性能优化要点，AI 助手加载后可在代码生成时自动遵循这些生产级标准，无需开发者反复提示。主要面向前端工程师、UI/UX 设计师及使用 AI 工具进行 React/Next.js 开发的团队，其创新在于将 callstackincubator 团队 的私域工程经验直接&quot;技能化&quot;，让 AI 无需人工提示即可实时调用权威规范，规避常见的反模式。目前安装量已达 11.3K，可通过 <code>npx skills add callstackincubator/agent-skills@react-native-best-practices</code> 集成到 Claude Code、Cursor 等主流 AI 工具。</p>
+    <a class="card-url" href="https://skills.sh/callstackincubator/agent-skills/react-native-best-practices" target="_blank" rel="noopener">🔗 https://skills.sh/callstackincubator/agent-skills/react-native-best-practices</a>
+  </div>
+  <div class="card">
+    <div class="card-head">
+      <span class="card-rank">#17</span>
+      <div class="card-title-wrap">
+        <div class="card-title"><a href="https://skills.sh/wshobson/agents/database-migration" target="_blank" rel="noopener">database-migration</a></div>
+        <div class="card-subtitle">数据库 Migration</div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span class="score">10.5K 次安装</span>
+      <span class="stars-count">★ 34.5k Stars</span>
+      <span class="badge badge-new">首次上榜</span>
+      
+    </div>
+    <p class="card-desc">数据库 Migration（database-migration）由 wshobson 团队 发布于 skills.sh，是专注于数据库与数据管理的 AI Agent 技能包。该技能为 AI Agent 提供数据库与数据管理领域的专业知识与操作规范，使 AI 在处理相关任务时具备更深的领域上下文，显著提升生成代码的准确性与行业标准符合度。主要面向后端工程师、全栈开发者及希望通过 AI 快速构建可靠数据层的独立开发者，其创新在于将垂直领域的专业知识以&quot;可插拔&quot;形式注入通用 AI 工具，突破了 AI 在细分场景下的上下文局限。目前安装量已达 10.5K，可通过 <code>npx skills add wshobson/agents@database-migration</code> 集成到 Claude Code、Cursor 等主流 AI 工具。</p>
+    <a class="card-url" href="https://skills.sh/wshobson/agents/database-migration" target="_blank" rel="noopener">🔗 https://skills.sh/wshobson/agents/database-migration</a>
+  </div>
+  <div class="card">
+    <div class="card-head">
+      <span class="card-rank">#18</span>
+      <div class="card-title-wrap">
+        <div class="card-title"><a href="https://skills.sh/supercent-io/skills-template/frontend-design-system" target="_blank" rel="noopener">frontend-design-system</a></div>
+        <div class="card-subtitle">前端 设计 系统</div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span class="score">8.5K 次安装</span>
+      
+      <span class="badge badge-new">首次上榜</span>
+      <span class="tags"><span class="tag">设计</span></span>
+    </div>
+    <p class="card-desc">前端 设计 系统（frontend-design-system）由 supercent-io 团队 发布于 skills.sh，是专注于前端与界面设计的 AI Agent 技能包。该技能为 AI 注入系统化的前端设计语言，涵盖布局网格、排版层次、色彩系统与交互反馈规范，使 AI 生成的 UI 代码兼顾视觉美感与可访问性，符合现代设计系统标准。主要面向前端工程师、UI/UX 设计师及使用 AI 工具进行 React/Next.js 开发的团队，其创新在于将设计系统中隐性的审美规则转化为 AI 可执行的显性指令，填补了通用 AI 在视觉设计判断上的短板。目前安装量已达 8.5K，可通过 <code>npx skills add supercent-io/skills-template@frontend-design-system</code> 集成到 Claude Code、Cursor 等主流 AI 工具。</p>
+    <a class="card-url" href="https://skills.sh/supercent-io/skills-template/frontend-design-system" target="_blank" rel="noopener">🔗 https://skills.sh/supercent-io/skills-template/frontend-design-system</a>
+  </div>
+  <div class="card">
+    <div class="card-head">
+      <span class="card-rank">#19</span>
+      <div class="card-title-wrap">
+        <div class="card-title"><a href="https://skills.sh/flutter/skills/flutter-working-with-databases" target="_blank" rel="noopener">flutter-working-with-databases</a></div>
+        <div class="card-subtitle">Flutter Working With Databases</div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span class="score">8.4K 次安装</span>
+      <span class="stars-count">★ 1.3k Stars</span>
+      <span class="badge badge-new">首次上榜</span>
+      
+    </div>
+    <p class="card-desc">Flutter Working With Databases（flutter-working-with-databases）由 flutter 团队 发布于 skills.sh，是专注于数据库与数据管理的 AI Agent 技能包。该技能为 AI Agent 提供数据库与数据管理领域的专业知识与操作规范，使 AI 在处理相关任务时具备更深的领域上下文，显著提升生成代码的准确性与行业标准符合度。主要面向后端工程师、全栈开发者及希望通过 AI 快速构建可靠数据层的独立开发者，其创新在于将垂直领域的专业知识以&quot;可插拔&quot;形式注入通用 AI 工具，突破了 AI 在细分场景下的上下文局限。目前安装量已达 8.4K，可通过 <code>npx skills add flutter/skills@flutter-working-with-databases</code> 集成到 Claude Code、Cursor 等主流 AI 工具。</p>
+    <a class="card-url" href="https://skills.sh/flutter/skills/flutter-working-with-databases" target="_blank" rel="noopener">🔗 https://skills.sh/flutter/skills/flutter-working-with-databases</a>
+  </div>
+  <div class="card">
+    <div class="card-head">
+      <span class="card-rank">#20</span>
+      <div class="card-title-wrap">
+        <div class="card-title"><a href="https://skills.sh/prisma/skills/prisma-database-setup" target="_blank" rel="noopener">prisma-database-setup</a></div>
+        <div class="card-subtitle">Prisma 数据库 Setup</div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span class="score">7.3K 次安装</span>
+      <span class="stars-count">★ 34 Stars</span>
+      <span class="badge badge-new">首次上榜</span>
+      
+    </div>
+    <p class="card-desc">Prisma 数据库 Setup（prisma-database-setup）由 prisma 团队 发布于 skills.sh，是专注于数据库与数据管理的 AI Agent 技能包。该技能为 AI Agent 提供数据库与数据管理领域的专业知识与操作规范，使 AI 在处理相关任务时具备更深的领域上下文，显著提升生成代码的准确性与行业标准符合度。主要面向后端工程师、全栈开发者及希望通过 AI 快速构建可靠数据层的独立开发者，其创新在于将垂直领域的专业知识以&quot;可插拔&quot;形式注入通用 AI 工具，突破了 AI 在细分场景下的上下文局限。目前安装量已达 7.3K，可通过 <code>npx skills add prisma/skills@prisma-database-setup</code> 集成到 Claude Code、Cursor 等主流 AI 工具。</p>
+    <a class="card-url" href="https://skills.sh/prisma/skills/prisma-database-setup" target="_blank" rel="noopener">🔗 https://skills.sh/prisma/skills/prisma-database-setup</a>
+  </div>
+  </section>
+
+    <footer class="footer">
+      由 skill-weekly-tracker 自动生成 · 数据来源：skills.sh 排行榜
+    </footer>
+  </div>
+</body>
+</html>
